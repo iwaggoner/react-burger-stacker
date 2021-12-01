@@ -14,7 +14,8 @@ const items = [
   {name: 'Lettuce', color: 'lawngreen'},
   {name: 'Tomato', color: 'tomato'},
   {name: 'Bacon', color: 'maroon'},
-  {name: 'Onion', color: 'lightyellow'}
+  {name: 'Onion', color: 'lightyellow'},
+  {name: 'Cheese', color: 'gold'}
 ]
 
 function App() {

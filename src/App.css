@@ -33,16 +33,24 @@
 
 .container {
   display: flex;
-  width: 1000px;
+  max-width: 1500px;
   justify-content: center;
   align-items: center;
 }
 
 .left {
-  width: 50%;
+  width: 300px;
+  margin: 15px;
+  border: 1px solid black;
+  border-radius: 5%;
+  padding: 20px;
 }
 .right {
-  width: 50%
+  width: 300px;
+  margin: 15px;  
+  border: 1px solid black;
+  border-radius: 5%;
+  padding: 20px;
 }
 
 @keyframes App-logo-spin {
@@ -52,4 +60,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Ingredient {
+  width: 300px;
+  text-align: center;
+  font-weight: 700;
+  
+}
+
+.burgerIngredient {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 300px;
+  text-align: center;
+  font-weight: 700;
 }

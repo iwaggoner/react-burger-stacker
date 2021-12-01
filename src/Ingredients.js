@@ -6,22 +6,29 @@ import './App.css';
 export default class Ingredients extends Component {
 
     state = {
-        burgerStack: []
+        burgerTotal: [],
     }
 
     addIngredient = (e) =>{
         e.preventDefault()
-        let currentStack = this.state.burgerStack
-        currentStack.push(e.target.value)
+        let currentStack = {
+            item: e.target[1].value,
+            color: e.target[0].value 
+        }
+        let burgerStack = this.state.burgerTotal
+        burgerStack.push(currentStack)
+        
         this.setState({
-            burgerStack: currentStack
+            burgerTotal: burgerStack,
         })
+        console.log(burgerStack)
+
     }
 
     clearBurger = (e) => {
         e.preventDefault()
         this.setState({
-            burgerStack: []
+            burgerTotal: []
         })
 
     }
@@ -30,17 +37,21 @@ export default class Ingredients extends Component {
 
         const allItems = this.props.items.map((el, i)=>{
             return (
-                <div>
-                    <li>{el.name}</li>
-                    <button onClick={this.addIngredient} key={i} value={el.name}>Added to Burger</button>
+                <div className = "Ingredient" style={{backgroundColor: el.color}}>
+                    <div>{el.name}</div>
+                    <form onSubmit={this.addIngredient}>
+                        <input hidden type="text" value={el.color}/>
+                        <input hidden type="text" value={el.name}/>
+                        <button type="submit">Added to Burger</button>
+                    </form>
                 </div>
             
             )
         })
         return (
             <div className="container">
-                <ul className="left">{allItems}</ul>
-                <Stack className="right" items={this.state.burgerStack} onClick={this.clearBurger}/>
+                <div className="left">{allItems}</div>
+                <Stack items={this.state.burgerTotal} onClick={this.clearBurger}/>
             </div>
         )
     }
