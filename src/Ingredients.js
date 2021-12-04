@@ -1,60 +1,57 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Stack from './Stack'
 import './App.css';
 
 
-export default class Ingredients extends Component {
+const Ingredients = props => {
 
-    state = {
-        burgerTotal: [],
-    }
+    // state = {
+    //     burgerTotal: [],
+    // }
+    const [burgerTotal, setBurgerTotal] = useState([])
 
-    addIngredient = (e) =>{
+    const addIngredient = (e) =>{
         e.preventDefault()
         let currentStack = {
-            item: e.target[1].value,
-            color: e.target[0].value 
-        }
-        let burgerStack = this.state.burgerTotal
-        burgerStack.push(currentStack)
+            item: e.target.attributes.name.value,
+            color: e.target.attributes.color.value,
+        } 
         
-        this.setState({
-            burgerTotal: burgerStack,
-        })
-        console.log(burgerStack)
-
+        setBurgerTotal(prevsBurgerTotal => [...prevsBurgerTotal, currentStack])
+        
     }
 
-    clearBurger = (e) => {
+    const clearBurger = (e) => {
         e.preventDefault()
-        this.setState({
-            burgerTotal: []
-        })
-
+        setBurgerTotal(prevsBurgetTotal => [])
     }
 
-    render () {
+    
 
-        const allItems = this.props.items.map((el, i)=>{
-            return (
-                <div className = "Ingredient" style={{backgroundColor: el.color}}>
-                    <div>{el.name}</div>
-                    <form onSubmit={this.addIngredient}>
-                        <input hidden type="text" value={el.color}/>
-                        <input hidden type="text" value={el.name}/>
-                        <button type="submit">Added to Burger</button>
-                    </form>
+    const allItems = props.items.map((el, i)=>{
+        return (
+                <div className = "Ingredient"
+                    onClick={addIngredient}
+                    name={el.name}
+                    color={el.color} 
+                    key={i}
+                    style={{backgroundColor: el.color}}
+                    >
+                    {el.name}
                 </div>
+           
             
             )
         })
         return (
             <div className="container">
                 <div className="left">{allItems}</div>
-                <Stack items={this.state.burgerTotal} onClick={this.clearBurger}/>
+                 <Stack items={burgerTotal} onClick={clearBurger}/>
             </div>
         )
-    }
 
 }
 
+
+
+export default Ingredients
